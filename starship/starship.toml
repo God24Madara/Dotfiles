@@ -1,0 +1,661 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │                                                                              │
+# │ ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗               │
+# │ ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝               │
+# │ ██║   ██║██║     ██║   ██║██╔████╔██║███████║   ██║   █████╗                 │
+# │ ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝                 │
+# │ ╚██████╔╝███████╗██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗               │
+# │  ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝               │
+# │                                                                              │
+# │                    Premium Terminal Experience                               │
+# │                Beautiful • Functional • Lightning Fast                       │
+# │                                                                              │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  ELEGANT PROMPT LAYOUT                                                     │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+format = """
+╭─$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_metrics\
+$python\
+$nodejs\
+$rust\
+$golang\
+$java\
+$c\
+$cpp\
+$ruby\
+$php\
+$swift\
+$kotlin\
+$scala\
+$lua\
+$dart\
+$elixir\
+$haskell\
+$julia\
+$nim\
+$ocaml\
+$perl\
+$zig\
+$deno\
+$dotnet\
+$docker_context\
+$kubernetes\
+$aws\
+$gcloud\
+$azure\
+$terraform\
+$vagrant\
+$nix_shell\
+$conda\
+$package\
+$cmake\
+$helm\
+$pulumi\
+$fill\
+$memory_usage\
+$cmd_duration\
+$jobs\
+$battery\
+$time\
+$line_break\
+╰─$character"""
+
+right_format = """$shell"""
+
+continuation_prompt = "╰─◆ "
+add_newline = true
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  COMMAND CHARACTER                                                         │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[character]
+success_symbol = "[◆](bold bright-green)"
+error_symbol = "[◆](bold bright-red)"
+vicmd_symbol = "[◇](bold bright-yellow)"
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  BEAUTIFUL DIRECTORY DISPLAY                                               │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[directory]
+format = "[ $path]($style)[$read_only]($read_only_style) "
+style = "bold bright-cyan"
+read_only = " 󰌾"
+read_only_style = "bright-red"
+truncation_length = 3
+truncate_to_repo = true
+home_symbol = "󰋜 ~"
+truncation_symbol = "…/"
+repo_root_style = "bold bright-purple"
+
+[directory.substitutions]
+"Documents" = "󰈙 Documents"
+"Downloads" = " Downloads"
+"Music" = "󰝚 Music"
+"Pictures" = "󰋩 Pictures" 
+"Videos" = "󰕧 Videos"
+"Desktop" = "󰧨 Desktop"
+"Projects" = "󰚝 Projects"
+"Code" = " Code"
+"Development" = " Dev"
+"GitHub" = " GitHub"
+"GitLab" = "󰮠 GitLab"
+"Bitbucket" = " Bitbucket"
+"src" = " src"
+"config" = " config"
+"dotfiles" = "󱁹 dotfiles"
+"scripts" = "󰯃 scripts"
+"bin" = " bin"
+"lib" = "󰲋 lib"
+"include" = "󰰀 include"
+"node_modules" = " node_modules"
+"venv" = " venv"
+"env" = " env"
+".config" = " .config"
+".git" = " .git"
+"target" = "󱘗 target"
+"build" = "󰿈 build"
+"dist" = "󰧪 dist"
+"public" = "󰜂 public"
+"static" = "󰜂 static"
+"assets" = "󰉌 assets"
+"images" = "󰋩 images"
+"docs" = "󰈙 docs"
+"test" = "󰙨 test"
+"tests" = "󰙨 tests"
+"tmp" = "󰊠 tmp"
+"temp" = "󰊠 temp"
+"cache" = "󰃨 cache"
+"logs" = "󰌱 logs"
+"www" = "󰖟 www"
+"html" = "󰌝 html"
+"css" = " css"
+"js" = " js"
+"ts" = "󰛦 ts"
+"json" = " json"
+"yaml" = " yaml"
+"yml" = " yml"
+"xml" = "󰗀 xml"
+"md" = " md"
+"txt" = "󰈙 txt"
+"pdf" = " pdf"
+"zip" = " zip"
+"tar" = " tar"
+"gz" = " gz"
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  USER & SYSTEM INFO                                                        │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[username]
+format = "[$user]($style)@"
+style_user = "bold bright-blue"
+style_root = "bold bright-red"
+show_always = false
+
+[hostname]
+format = "[$hostname]($style) "
+style = "bold bright-magenta"
+ssh_only = true
+
+[os]
+format = "[$symbol ]($style)"
+style = "bold bright-white"
+disabled = false
+
+[os.symbols]
+Arch = "󰣇"
+Alpine = ""
+Amazon = ""
+Android = ""
+Artix = "󰣇"
+CentOS = ""
+Debian = ""
+DragonFly = "🐉"
+Emscripten = ""
+EndeavourOS = ""
+Fedora = "󰣛"
+FreeBSD = ""
+Garuda = "󰛓"
+Gentoo = "󰣨"
+HardenedBSD = "󰞌"
+Illumos = "󰈸"
+Linux = "󰌽"
+Macos = "󰀵"
+Manjaro = ""
+Mariner = ""
+MidnightBSD = "🌙"
+Mint = "󰣭"
+NetBSD = ""
+NixOS = ""
+OpenBSD = "󰈺"
+openSUSE = ""
+OracleLinux = "󰌷"
+Pop = ""
+Raspbian = ""
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Redox = "󰀘"
+Solus = "󰠳"
+SUSE = ""
+Ubuntu = ""
+Unknown = ""
+Windows = "󰍲"
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  ADVANCED GIT INTEGRATION                                                  │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[git_branch]
+format = "[ $symbol$branch(:$remote_branch)]($style) "
+symbol = ""
+style = "bold bright-purple"
+truncation_length = 25
+truncation_symbol = "…"
+only_attached = false
+
+[git_status]
+format = "([$all_status$ahead_behind]($style))"
+style = "bold bright-red"
+ahead = "⇡${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+behind = "⇣${count} "
+conflicted = "=${count} "
+untracked = "?${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+up_to_date = "✓ "
+stashed = "$${count} "
+
+[git_commit]
+format = "[ \\($hash$tag\\)]($style) "
+commit_hash_length = 8
+tag_symbol = " 🏷 "
+style = "bold bright-green"
+
+[git_state]
+format = "\\([$state( $progress_current/$progress_total)]($style)\\) "
+style = "bright-black"
+
+[git_metrics]
+format = "([+$added]($added_style))([−$deleted]($deleted_style)) "
+added_style = "bold bright-green"
+deleted_style = "bold bright-red"
+only_nonzero_diffs = true
+disabled = false
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  COMPREHENSIVE LANGUAGE DETECTION                                          │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[python]
+format = "[ ${symbol}${pyenv_prefix}(${version})(\\($virtualenv\\)) ]($style)"
+symbol = ""
+style = "bold yellow"
+detect_extensions = ["py", "pyi", "pyw", "pyz", "pyzw"]
+detect_files = [".python-version", "Pipfile", "__init__.py", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini", "poetry.lock", "setup.cfg", "conda-environment.yaml", "environment.yml"]
+detect_folders = [".venv", "venv", "env", ".env"]
+
+[nodejs]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-green"
+detect_extensions = ["js", "mjs", "cjs", "ts", "tsx", "jsx"]
+detect_files = ["package.json", ".node-version", ".nvmrc", "yarn.lock", "pnpm-lock.yaml"]
+detect_folders = ["node_modules"]
+
+[rust]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-red"
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml", "Cargo.lock"]
+
+[golang]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-cyan"
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
+
+[java]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-blue"
+detect_extensions = ["java", "class", "jar", "gradle", "clj", "cljc"]
+detect_files = ["pom.xml", "build.gradle.kts", "build.sbt", ".java-version", "deps.edn", "project.clj", "build.boot"]
+
+[c]
+format = "[ $symbol($version(-$name)) ]($style)"
+symbol = ""
+style = "bold blue"
+detect_extensions = ["c", "h"]
+detect_files = ["Makefile", "makefile", "CMakeLists.txt"]
+
+[cpp]
+format = "[ $symbol($version(-$name)) ]($style)"
+symbol = ""
+style = "bold blue"
+detect_extensions = ["cpp", "cc", "cxx", "c++", "hpp", "hh", "hxx", "h++"]
+detect_files = ["CMakeLists.txt", "Makefile", "makefile"]
+
+[ruby]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-red"
+detect_extensions = ["rb"]
+detect_files = [".ruby-version", "Gemfile", ".rbenv"]
+detect_folders = [".rbenv"]
+
+[php]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-purple"
+detect_extensions = ["php", "phar"]
+detect_files = ["composer.json", ".php-version"]
+
+[swift]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-red"
+detect_extensions = ["swift"]
+detect_files = ["Package.swift", ".swift-version"]
+
+[kotlin]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-blue"
+detect_extensions = ["kt", "kts"]
+
+[scala]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-red"
+detect_extensions = ["scala", "sc", "sbt"]
+detect_files = [".scalaenv", ".sbtenv", "build.sbt"]
+
+[lua]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-blue"
+detect_extensions = ["lua"]
+detect_files = [".lua-version"]
+
+[dart]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-blue"
+detect_extensions = ["dart"]
+detect_files = ["pubspec.yaml", "pubspec.yml"]
+
+[elixir]
+format = "[ $symbol($version \\(OTP $otp_version\\)) ]($style)"
+symbol = ""
+style = "bold bright-purple"
+detect_extensions = ["ex", "exs"]
+detect_files = ["mix.exs"]
+
+[haskell]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-purple"
+detect_extensions = ["hs", "lhs"]
+detect_files = ["stack.yaml", "cabal.project"]
+
+[julia]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-purple"
+detect_extensions = ["jl"]
+detect_files = ["Project.toml", "Manifest.toml"]
+
+[nim]
+format = "[ $symbol($version) ]($style)"
+symbol = "󰆥"
+style = "bold bright-yellow"
+detect_extensions = ["nim", "nims", "nimble"]
+
+[ocaml]
+format = "[ $symbol($version)(\\($switch_indicator$switch_name\\)) ]($style)"
+symbol = ""
+style = "bold bright-yellow"
+detect_extensions = ["opam", "ml", "mli", "re", "rei"]
+detect_files = ["dune", "dune-project", "jbuild", "jbuild-ignore", ".merlin"]
+
+[perl]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-cyan"
+detect_extensions = ["pl", "pm", "pod"]
+
+[zig]
+format = "[ $symbol($version) ]($style)"
+symbol = ""
+style = "bold bright-yellow"
+detect_extensions = ["zig"]
+
+[deno]
+format = "[ $symbol($version) ]($style)"
+symbol = "🦕"
+style = "bold bright-green"
+detect_extensions = ["ts", "tsx", "js", "jsx"]
+detect_files = ["deno.json", "deno.jsonc", "mod.ts", "deps.ts", "mod.js", "deps.js"]
+
+[dotnet]
+format = "[ $symbol($version)(🎯 $tfm) ]($style)"
+symbol = "󰪮"
+style = "bold bright-blue"
+detect_extensions = ["csproj", "fsproj", "xproj"]
+detect_files = ["global.json", "project.json", "Directory.Build.props", "Directory.Build.targets", "Packages.props"]
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  CONTAINERS & CLOUD PLATFORMS                                              │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[docker_context]
+format = "[ $symbol$context ]($style)"
+symbol = ""
+style = "bold bright-blue"
+only_with_files = false
+
+[kubernetes]
+format = "[ $symbol$context( \\($namespace\\)) ]($style)"
+symbol = "☸"
+style = "bold bright-blue"
+disabled = false
+
+[aws]
+format = "[ $symbol($profile)(\\($region\\))(\\[$duration\\]) ]($style)"
+symbol = ""
+style = "bold bright-yellow"
+
+[gcloud]
+format = "[ $symbol$account(@$domain)(\\($region\\)) ]($style)"
+symbol = ""
+style = "bold bright-blue"
+
+[azure]
+format = "[ $symbol($subscription) ]($style)"
+symbol = "󰠅"
+style = "bold bright-blue"
+
+[terraform]
+format = "[ $symbol$workspace ]($style)"
+symbol = "💠"
+style = "bold bright-purple"
+
+[vagrant]
+format = "[ $symbol($version) ]($style)"
+symbol = "⍱"
+style = "bold bright-blue"
+
+[helm]
+format = "[ $symbol($version) ]($style)"
+symbol = "⎈"
+style = "bold bright-white"
+
+[pulumi]
+format = "[ $symbol$stack ]($style)"
+symbol = ""
+style = "bold bright-yellow"
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  PACKAGE MANAGERS & BUILD TOOLS                                            │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[package]
+format = "[ $symbol$version ]($style)"
+symbol = "󰏗"
+style = "bold bright-magenta"
+
+[conda]
+format = "[ $symbol$environment ]($style)"
+symbol = ""
+style = "bold bright-green"
+
+[nix_shell]
+format = "[ $symbol$state(\\($name\\)) ]($style)"
+symbol = ""
+style = "bold bright-blue"
+
+[cmake]
+format = "[ $symbol($version) ]($style)"
+symbol = "△"
+style = "bold bright-blue"
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  PERFORMANCE & STATUS MONITORING                                           │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[cmd_duration]
+format = "[ $duration]($style) "
+min_time = 1_000
+style = "bold bright-yellow"
+show_milliseconds = false
+show_notifications = false
+
+[memory_usage]
+format = "[${ram}( | ${swap})]($style) "
+threshold = 70
+symbol = "󰍛"
+style = "bold dimmed bright-white"
+disabled = false
+
+[battery]
+format = "[$symbol$percentage ]($style)"
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+unknown_symbol = ""
+empty_symbol = ""
+
+[[battery.display]]
+threshold = 10
+style = "bold bright-red"
+
+[[battery.display]]
+threshold = 30
+style = "bold bright-yellow"
+
+[[battery.display]]
+threshold = 50
+style = "bold bright-blue"
+
+[[battery.display]]
+threshold = 80
+style = "bold bright-green"
+
+[jobs]
+format = "[$symbol$number ]($style)"
+symbol = "✦"
+style = "bold bright-blue"
+
+[status]
+format = "[$symbol$status ]($style)"
+symbol = "✖"
+style = "bold bright-red"
+disabled = false
+
+[shell]
+format = "[$indicator]($style)"
+fish_indicator = "󰈺"
+powershell_indicator = ""
+bash_indicator = ""
+zsh_indicator = ""
+nu_indicator = ">"
+xonsh_indicator = "🐚"
+cmd_indicator = "C"
+style = "bold dimmed bright-white"
+disabled = false
+
+[sudo]
+format = "[as $symbol]($style)"
+symbol = "🧙"
+style = "bold bright-blue"
+disabled = false
+
+[time]
+format = "[ $time]($style) "
+style = "bold bright-white"
+disabled = true
+time_format = "%R"
+
+[line_break]
+disabled = false
+
+[fill]
+symbol = " "
+style = "bold black"
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  ULTRA-COMPACT TRANSIENT PROMPT (Single line, minimal beauty)              │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[transient_prompt]
+enabled = true
+format = """◆ $git_branch$git_status$cmd_duration"""
+
+# ┌────────────────────────────────────────────────────────────────────────────┐
+# │  EXTRA MODULES FOR ENHANCED FUNCTIONALITY                                  │
+# └────────────────────────────────────────────────────────────────────────────┘
+
+[localip]
+ssh_only = false
+format = "[ $localipv4]($style) "
+style = "bold bright-yellow"
+disabled = true
+
+[singularity]
+format = "[ $symbol\\[$env\\] ]($style)"
+symbol = ""
+style = "bold bright-blue"
+
+[env_var]
+format = "[ $symbol$env_value ]($style)"
+symbol = ""
+style = "bold bright-cyan"
+disabled = true
+
+[custom.git_scope]
+command = '''
+git config user.name 2>/dev/null || echo "No Git User"
+'''
+when = "git rev-parse --is-inside-work-tree 2>/dev/null"
+format = "[ $output ]($style)"
+style = "bold bright-green"
+disabled = true
+
+[custom.disk_usage]
+command = "df -h . | awk 'NR==2{print $5}'"
+format = "[ $output ]($style)"
+style = "bold bright-red"
+disabled = true
+
+[custom.uptime]
+command = "uptime -p 2>/dev/null | sed 's/up //'"
+when = "test -f /proc/uptime"
+format = "[ $output ]($style)"
+style = "bold bright-green"
+disabled = true
+
+# Performance optimization
+scan_timeout = 30
+command_timeout = 500
+
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │                                                                              │
+# │                         ULTIMATE TERMINAL GUIDE                              │
+# │                                                                              │
+# │  🚀 SETUP INSTRUCTIONS:                                                      │
+# │     1. Save this file as ~/.config/starship.toml                             │
+# │     2. Install a Nerd Font (recommended: JetBrains Mono Nerd Font)           │
+# │     3. Restart your terminal or run: source ~/.bashrc                        │
+# │                                                                              │
+# │  ✨ KEY FEATURES:                                                            │
+# │     • Elegant rounded borders with Unicode box drawing                       │
+# │     • Comprehensive language and tool detection                              │
+# │     • Advanced Git integration with metrics                                  │
+# │     • Transient prompt for clean command history                             │
+# │     • Performance monitoring and status display                              │
+# │     • Cloud platform integration                                             │
+# │     • Smart directory icons and path truncation                              │
+# │                                                                              │
+# │  🎨 CUSTOMIZATION:                                                           │
+# │     • Uncomment custom modules for additional info                           │
+# │     • Modify colors and symbols to match your theme                          │
+# │     • Adjust truncation lengths and timeouts as needed                       │
+# │                                                                              │
+# │  Your terminal is now absolutely stunning! 🌟                                │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
